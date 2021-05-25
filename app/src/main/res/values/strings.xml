@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">DDM-TDE2</string>
+  <string name="main_btn_camera">Tirar foto</string>
+  <string name="main_btn_galeria">Escolher na galeria</string>
+</resources>
