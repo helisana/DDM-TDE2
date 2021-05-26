@@ -3,10 +3,13 @@ package com.ddm.tde2;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +28,14 @@ public class CameraActivity extends AppCompatActivity {
     private static final int CAMERA_INTENT_CODE = 3001;
 
     String caminhoDaImagem;
+    ImageView imagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+        imagem = findViewById(R.id.imagem_camera);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestCameraPermission();
@@ -53,7 +59,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     // Abre a câmera
-    public void sendCameraIntent(){
+    public void sendCameraIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_FINISH_ON_COMPLETION, true);
 
@@ -79,7 +85,7 @@ public class CameraActivity extends AppCompatActivity {
 
                 Uri photoUri = FileProvider.getUriForFile(
                         CameraActivity.this,
-                        "com.ddm.photolike.fileprovider",
+                        "com.ddm.tde2.fileprovider",
                         arquivoDaImagem
                 );
 
@@ -114,10 +120,15 @@ public class CameraActivity extends AppCompatActivity {
 
                 // Verifica se o arquivo existe
                 if (arquivo.exists()) {
+                    // Transforma para preto e branco
+                    ColorMatrix matrix = new ColorMatrix();
+                    matrix.setSaturation(0);
+                    imagem.setColorFilter(new ColorMatrixColorFilter(matrix));
                     // Coloca a imagem na tela pela ImageView
-                    //fotoPerfil.setImageURI(Uri.fromFile(file));
+                    imagem.setImageURI(Uri.fromFile(arquivo));
                 }
             } else {
+                finish();
                 Toast.makeText(CameraActivity.this,
                         "Problem getting the image from the camera app",
                         Toast.LENGTH_LONG).show();

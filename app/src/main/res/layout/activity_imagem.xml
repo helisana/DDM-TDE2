@@ -5,13 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CameraActivity">
+    tools:context=".ImagemActivity">
 
   <ImageView
       android:layout_width="377dp"
-      android:layout_height="376dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/imagem_camera"
+      android:layout_height="376dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/imagem_galeria"
       app:layout_constraintStart_toStartOf="parent"
       android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5" app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
